@@ -36,9 +36,18 @@ namespace MyNameSpace
         #endregion
 
         #region 事件:程式入口
+        private void Awake()
+        {
+            ani = GetComponent<Animator>();
+            rig = GetComponent<Rigidbody2D>();
+        }
         private void Start()
         {
-            print("Hollow World!!!")
+            print("Hollow World!!!");
+        }
+        private void Update()
+        {
+
         }
         #endregion
     }
