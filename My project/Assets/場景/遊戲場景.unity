@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 202750614}
   - component: {fileID: 202750618}
   - component: {fileID: 202750617}
+  - component: {fileID: 202750619}
   m_Layer: 0
   m_Name: pink man
   m_TagString: Untagged
@@ -267,6 +268,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &202750619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 202750613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f05e1ef6bd1ba7419427893ce85fc7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RunSpeed: 16
+  JumpHigh: 8
 --- !u!1 &608722142
 GameObject:
   m_ObjectHideFlags: 0
