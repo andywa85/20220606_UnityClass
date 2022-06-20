@@ -23,16 +23,35 @@ namespace MyNameSpace
         */
         #region 資料:保存系統需要的資料
         [SerializeField , Header("跑速") , Tooltip("角色的跑速") , Range( 0 , 128 )]
-        private int RunSpeed = 16;
+        private int RunSpeed = 4;
         [SerializeField]
         private int JumpHigh = 8;
         private Animator ani;
         private Rigidbody2D rig;
+        private bool Jumpclick;
 
         #endregion
 
         #region 功能:實現該系統的複雜方法
-
+        private void Run()
+        {
+            rig.velocity = new Vector2(RunSpeed, rig.velocity.y);
+        }
+        private void Jumpkey()
+        {
+            if(Input.GetKeyDown(KeyCode.Space))
+            {
+                Jumpclick = true;
+            }
+        }
+        private void Jumpforus()
+        {
+            if(Jumpclick)
+            {
+                rig.AddForce(new Vector2(0, JumpHigh));
+                Jumpclick = false;
+            }
+        }
         #endregion
 
         #region 事件:程式入口
@@ -43,11 +62,16 @@ namespace MyNameSpace
         }
         private void Start()
         {
-            print("Hollow World!!!");
+            
         }
         private void Update()
         {
-
+            Run();
+            Jumpkey();
+        }
+        private void FixedUpdate()
+        {
+            Jumpforus();
         }
         #endregion
     }

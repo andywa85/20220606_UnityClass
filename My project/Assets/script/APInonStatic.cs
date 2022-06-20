@@ -21,10 +21,20 @@ namespace MyNameSpace
         */
         [SerializeField]
         private GameObject Pinkman;
+        [SerializeField]
+        private Transform Startup;
+        [SerializeField]
+        private Camera Camera;
+
         private void Start()
         {
-            print(Pinkman.activeInHierarchy);
-            Pinkman.tag = "Player";
+            
+
+        }
+
+        private void Update()
+        {
+            
         }
 
     }
