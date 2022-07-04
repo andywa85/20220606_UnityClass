@@ -23,12 +23,21 @@ namespace MyNameSpace
         */
         #region 資料:保存系統需要的資料
         [SerializeField , Header("跑速") , Tooltip("角色的跑速") , Range( 0 , 128 )]
-        private int RunSpeed = 4;
+        private int RunSpeed = 1;
         [SerializeField]
         private int JumpHigh = 8;
+        [SerializeField , Header("檢查地板尺寸")]
+        private Vector3 v3checkgroundsize = Vector3.one;
+        [SerializeField , Header("檢查地板位移")]
+        private Vector3 v3checkgroundoff;
+        [SerializeField , Header("檢查地板顏色")]
+        private Color colorcheckground = new Color(1, 0, 0.2f, 0.5f);
+        [SerializeField , Header("檢查地板圖層")]
+        private LayerMask layrtgroundcheck;
         private Animator ani;
         private Rigidbody2D rig;
         private bool Jumpclick;
+        private bool isground;
 
         #endregion
 
@@ -39,9 +48,13 @@ namespace MyNameSpace
         }
         private void Jumpkey()
         {
-            if(Input.GetKeyDown(KeyCode.Space))
+            if(Input.GetKeyDown(KeyCode.Space) && isground)
             {
                 Jumpclick = true;
+            }
+            else if(Input.GetKeyUp(KeyCode.Space))
+            {
+                Jumpclick = false;
             }
         }
         private void Jumpforus()
@@ -52,9 +65,20 @@ namespace MyNameSpace
                 Jumpclick = false;
             }
         }
+        private void groundcheck()
+        {
+            Collider2D hit = Physics2D.OverlapBox(transform.position + v3checkgroundoff, v3checkgroundsize, 0, layrtgroundcheck);
+            //print(hit.name);
+            isground = true;
+        }
         #endregion
 
         #region 事件:程式入口
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = colorcheckground;
+            Gizmos.DrawCube(transform.position + v3checkgroundoff, v3checkgroundsize);
+        }
         private void Awake()
         {
             ani = GetComponent<Animator>();
@@ -68,10 +92,19 @@ namespace MyNameSpace
         {
             Run();
             Jumpkey();
+            groundcheck();
         }
         private void FixedUpdate()
         {
             Jumpforus();
+        }
+        private void OnEnable()
+        {
+            
+        }
+        private void OnDisable()
+        {
+            rig.velocity = Vector3.zero;
         }
         #endregion
     }
