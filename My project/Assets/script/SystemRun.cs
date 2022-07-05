@@ -34,6 +34,8 @@ namespace MyNameSpace
         private Color colorcheckground = new Color(1, 0, 0.2f, 0.5f);
         [SerializeField , Header("檢查地板圖層")]
         private LayerMask layrtgroundcheck;
+        [SerializeField, Header("跳躍開關")]
+        private string namejump = "跳開關";
         private Animator ani;
         private Rigidbody2D rig;
         private bool Jumpclick;
@@ -71,6 +73,10 @@ namespace MyNameSpace
             //print(hit.name);
             isground = true;
         }
+        private void updateanimtor()
+        {
+            ani.SetBool(namejump, !isground);
+        }
         #endregion
 
         #region 事件:程式入口
@@ -93,6 +99,7 @@ namespace MyNameSpace
             Run();
             Jumpkey();
             groundcheck();
+            updateanimtor();
         }
         private void FixedUpdate()
         {
